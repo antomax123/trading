@@ -1,0 +1,93 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js" integrity="sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../js/dashboard.js"></script>
+<link href="../css/dashboard.css" rel="stylesheet">
+
+<html>
+	<body style="margin:0" class="dark">
+		<div style="height:100vh;width:100vw;margin:0;overflow:hidden;display:flex; flex-flow: column;">
+			<div id="remerciements" style="position:absolute; color:rgba(255,255,255,0.6); top:0px; right:6px;">
+				Développé par Marc Bresson, adapté par Maxime Secher
+			</div>
+			<div class="conteneur" style="margin:20px 10px 0px 10px; padding:0px">
+				<div id="banniere">
+					<div id="logo" style="float:left;">
+						<img src="../parametres/logo.jpg" height="100%"/>
+					</div>
+					<div id="titre">
+						Krash Boursier IF x TTV
+					</div>
+					<span id="moins_chere">
+						<span class="vertical">Les<br>moins<br>chères</span>
+						<span><span class="hashtag_prix">#1</span><span class="indice" id="numero_1"></span></span>
+						<span><span class="hashtag_prix">#2</span><span class="indice" id="numero_2"></span></span>
+						<span><span class="hashtag_prix">#3</span><span class="indice" id="numero_3"></span></span>
+					</span>
+				</div>
+			</div>
+			<div style="display:flex; flex-flow: row; flex: 1 1 auto;margin:10px;">
+				<div class="chart-container conteneur" style="position: relative; height:100%; width:70%; box-sizing: border-box; margin-right: 10px; flex: 1 1 auto;">
+					<canvas id="chart" style="width:100%;height:100%;"></canvas>
+				</div>
+				<div class="conteneur" style="height:100%; width: auto; box-sizing: border-box;">
+					<table id="afficheur_prix">
+						<thead>
+							<tr>
+								<th class="cercle"></th>
+								<th class="nom">nom</th>
+								<th class="indice">indice</th>
+								<th class="prix">prix</th>
+								<th class="croissance">croissance</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+
+const ctx = document.getElementById('chart').getContext('2d');
+
+const config = {
+  type: 'line',
+  options: {
+		plugins: {
+			legend: {
+				display: true,
+				labels: {
+					color: 'rgba(255,255,255,0.7)',
+					boxHeight: 1,
+				}
+			},
+			tooltip: {
+				intersect: false,
+			}
+		},
+		resizeDelay: 300,
+		responsive: false,
+		scales: {
+			yAxis: {
+				position: 'right',
+				ticks: {
+					color: '#fff',
+					callback: function(value, index, values) {
+                        return value + " €";
+                    }
+				},
+				grid: {
+					borderColor: '#fff',
+					color: 'rgba(255,255,255,0.4)',
+					borderDash:[5, 5] ,
+				}
+			}
+		},
+	}
+};
+
+const myChart = new Chart(ctx, config);
+</script>
